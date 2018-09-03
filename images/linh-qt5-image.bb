@@ -43,6 +43,8 @@ IMAGE_INSTALL += " \
     fwup \
     u-boot-fw-utils \
     vim \
+    wiringpi \
+    kedei-wiringpi \
 "
 
 IMAGE_CLASSES += "fwup-rpi"
