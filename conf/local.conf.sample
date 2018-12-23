@@ -12,23 +12,16 @@ PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
 
 PREFERRED_PROVIDER_udev = "eudev"
-VIRTUAL-RUNTIME_init_manager = "sysvinit"
 
 MACHINE_FEATURES_remove = "apm"
 
-IMAGE_FSTYPES = "tar.xz ext4"
+IMAGE_FSTYPES = "tar.xz ext4 fwup"
 
 # override the meta-raspberrypi default 4.9 kernel
 PREFERRED_VERSION_linux-raspberrypi = "4.14.%"
 
 # Choose the board you are building for
-#MACHINE="raspberrypi"
-#MACHINE="raspberrypi0"
-MACHINE="raspberrypi0-wifi"
-#MACHINE="raspberrypi2"
-#MACHINE = "raspberrypi3"
-#MACHINE="raspberrypi-cm"
-#MACHINE="raspberrypi-cm3"
+MACHINE = "walle-pi3-64"
 
 # Choices are Image or zImage if NOT using u-boot (no u-boot is the default)
 # Choices are uImage or zImage if using u-boot, though if you choose zImage
@@ -37,13 +30,13 @@ KERNEL_IMAGETYPE = "zImage"
 
 ENABLE_UART="1"
 
-#DL_DIR = "${HOME}/oe-sources"
+DL_DIR = "${HOME}/downloads"
 
-#SSTATE_DIR = "/oe4/rpi/sstate-cache"
+SSTATE_DIR = "${HOME}/sstate"
 
 #TMPDIR = "/oe4/rpi/tmp-sumo"
 
-DISTRO = "poky"
+DISTRO ?= "walle"
 
 PACKAGE_CLASSES = "package_ipk"
 
@@ -68,3 +61,12 @@ DISTRO_FEATURES_append = " systemd"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = ""
+
+OKDA_FW_PLATFORM ?= "stereocam"
+OKDA_FW_VERSION ?= "0.1.1"
+OKDA_FW_BOOT_FROM ?= "emmc"
+# Network type: dhcp/static/off
+OKDA_FW_ETH0_TYPE ?= "dhcp"
+OKDA_FW_ETH0_IP ?= "10.71.4.104"
+OKDA_FW_ETH0_GW ?= "10.71.4.1"
+OKDA_FW_ETH0_DNS ?= "10.100.1.2"

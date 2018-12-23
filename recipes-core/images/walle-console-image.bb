@@ -90,7 +90,6 @@ IMAGE_INSTALL += " \
     ${DEV_SDK_INSTALL} \
     ${DEV_EXTRAS} \
     ${EXTRA_TOOLS_INSTALL} \
-    ${RPI_STUFF} \
     ${WIFI_SUPPORT} \
 "
 
@@ -105,11 +104,11 @@ disable_bootlogd() {
 ROOTFS_POSTPROCESS_COMMAND += " \
     set_local_timezone ; \
     disable_bootlogd ; \
- "
+"
 
 IMAGE_FSTYPES_remove = "rpi-sdimg"
-IMAGE_CLASSES += " fwup-rpi0"
-IMAGE_FSTYPES_append = " rpi-fwup0"
+IMAGE_CLASSES += " fwup"
+#IMAGE_FSTYPES_append = " fwup"
 
-export IMAGE_BASENAME = "console-image"
+export IMAGE_BASENAME = "walle-console-image"
 

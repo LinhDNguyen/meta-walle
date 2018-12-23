@@ -1,21 +1,27 @@
-# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf
-# changes incompatibly
-POKY_BBLAYERS_CONF_VERSION = "2"
+LCONF_VERSION = "7"
 
 BBPATH = "${TOPDIR}"
 BBFILES ?= ""
 
 BBLAYERS ?= " \
-    ${HOME}/poky-sumo/meta \
-    ${HOME}/poky-sumo/meta-poky \
-    ${HOME}/poky-sumo/meta-openembedded/meta-oe \
-    ${HOME}/poky-sumo/meta-openembedded/meta-multimedia \
-    ${HOME}/poky-sumo/meta-openembedded/meta-networking \
-    ${HOME}/poky-sumo/meta-openembedded/meta-perl \
-    ${HOME}/poky-sumo/meta-openembedded/meta-python \
-    ${HOME}/poky-sumo/meta-qt5 \
-    ${HOME}/poky-sumo/meta-raspberrypi \
-    ${HOME}/poky-sumo/meta-security \
-    ${HOME}/rpi/meta-rpi \
-    ${HOME}/rpi/meta-linh \
+    ##OEROOT##/meta \
+    ##OEROOT##/meta-poky \
+    ##OEROOT##/../meta-openembedded/meta-perl \
+    ##OEROOT##/../meta-openembedded/meta-python \
+    ##OEROOT##/../meta-openembedded/meta-filesystems \
+    ##OEROOT##/../meta-openembedded/meta-gnome \
+    ##OEROOT##/../meta-openembedded/meta-multimedia \
+    ##OEROOT##/../meta-openembedded/meta-networking \
+    ##OEROOT##/../meta-openembedded/meta-webserver \
+    ##OEROOT##/../meta-openembedded/meta-xfce \
+    ##OEROOT##/../meta-openembedded/meta-initramfs \
+    ##OEROOT##/../meta-openembedded/meta-oe \
+    ##OEROOT##/../meta-qt5 \
+    ##OEROOT##/../meta-raspberrypi \
+    ##OEROOT##/../meta-rpi \
+    ##OEROOT##/../meta-linh \
+"
+
+BBLAYERS_NON_REMOVABLE ?= " \
+    ##OEROOT##/meta \
 "

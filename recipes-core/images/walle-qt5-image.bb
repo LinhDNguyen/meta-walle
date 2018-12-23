@@ -2,7 +2,7 @@ SUMMARY = "A basic Qt5 qwidgets dev image"
 HOMEPAGE = "http://www.jumpnowtek.com"
 LICENSE = "MIT"
 
-require console-image.bb
+require walle-console-image.bb
 
 QT_DEV_TOOLS = " \
     qtbase-dev \
@@ -61,8 +61,6 @@ IMAGE_INSTALL += " \
     rpi-gpio \
 "
 
-IMAGE_CLASSES += "fwup-rpi"
-
 DISTRO_FEATURES += "wifi"
 
-export IMAGE_BASENAME = "linh-qt5-image"
+export IMAGE_BASENAME = "walle-qt5-image"
