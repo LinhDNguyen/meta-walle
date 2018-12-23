@@ -107,5 +107,9 @@ ROOTFS_POSTPROCESS_COMMAND += " \
     disable_bootlogd ; \
  "
 
+IMAGE_FSTYPES_remove = "rpi-sdimg"
+IMAGE_CLASSES += " fwup-rpi0"
+IMAGE_FSTYPES_append = " rpi-fwup0"
+
 export IMAGE_BASENAME = "console-image"
 

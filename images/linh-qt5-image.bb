@@ -43,29 +43,26 @@ IMAGE_INSTALL += " \
     fwup \
     u-boot-fw-utils \
     vim \
+    wpa-supplicant \
+    openssh \
+    zeromq \
+    freetype \
+    python-scons \
+    swig \
+    dnsmasq \
     wiringpi \
-    kedei-wiringpi \
+    ppp \
+    git \
+    python-flask \
+    python-flask-login \
+    python-jinja2 \
+    python-pyserial \
+    python-pyzmq \
+    rpi-gpio \
 "
 
 IMAGE_CLASSES += "fwup-rpi"
 
-do_rootfs_append() {
-    print("~~~~LINH~~~~~~")
-    print("~~TOPDIR: %s~~" % (d.getVar("TOPDIR")))
-    import os
-    print("~~CURDIR: %s~~" % (os.getcwd()))
-    print("~~IMAGE_ROOTFS: %s~~" % (d.getVar("IMAGE_ROOTFS")))
-    print("~~S: %s~~" % (d.getVar("S")))
-}
-
-do_image_complete_append() {
-    print("~~~~Complete append~~~~~")
-    print("~~TOPDIR: %s~~" % (d.getVar("TOPDIR")))
-    import os
-    print("~~CURDIR: %s~~" % (os.getcwd()))
-    print("~~S: %s~~" % (d.getVar("S")))
-    print("~~IMGDEPLOYDIR: %s~~" % (d.getVar("IMGDEPLOYDIR")))
-    print("~~DEPLOY_DIR_IMAGE: %s~~" % (d.getVar("DEPLOY_DIR_IMAGE")))
-}
+DISTRO_FEATURES += "wifi"
 
 export IMAGE_BASENAME = "linh-qt5-image"
