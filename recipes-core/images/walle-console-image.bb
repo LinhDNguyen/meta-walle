@@ -107,8 +107,8 @@ ROOTFS_POSTPROCESS_COMMAND += " \
 "
 
 IMAGE_FSTYPES_remove = "rpi-sdimg"
-IMAGE_CLASSES += " fwup"
-#IMAGE_FSTYPES_append = " fwup"
+IMAGE_CLASSES += " fwup-img"
+IMAGE_FSTYPES_append = " fwup-img"
 
 export IMAGE_BASENAME = "walle-console-image"
 

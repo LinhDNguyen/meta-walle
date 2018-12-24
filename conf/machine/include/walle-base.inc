@@ -5,7 +5,7 @@ include conf/machine/include/rpi-default-providers.inc
 SOC_FAMILY = "rpi"
 include conf/machine/include/soc-family.inc
 
-IMAGE_FSTYPES ?= "tar.bz2 ext3 rpi-sdimg"
+IMAGE_FSTYPES ?= "tar.bz2 ext3 fwup-img"
 WKS_FILE ?= "sdimage-raspberrypi.wks"
 
 XSERVER = " \
@@ -14,7 +14,7 @@ XSERVER = " \
     ${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "xf86-video-modesetting", "xf86-video-fbdev", d)} \
     "
 
-RPI_KERNEL_DEVICETREE_OVERLAYS ?= " \
+WALLE_KERNEL_DEVICETREE_OVERLAYS ?= " \
     overlays/dwc2.dtbo \
     overlays/hifiberry-amp.dtbo \
     overlays/hifiberry-dac.dtbo \
@@ -38,20 +38,14 @@ RPI_KERNEL_DEVICETREE_OVERLAYS ?= " \
     overlays/at86rf233.dtbo \
     "
 
-RPI_KERNEL_DEVICETREE ?= " \
-    bcm2708-rpi-0-w.dtb \
-    bcm2708-rpi-b.dtb \
-    bcm2708-rpi-b-plus.dtb \
-    bcm2709-rpi-2-b.dtb \
+WALLE_KERNEL_DEVICETREE = " \
     bcm2710-rpi-3-b.dtb \
-    bcm2710-rpi-3-b-plus.dtb \
-    bcm2708-rpi-cm.dtb \
     bcm2710-rpi-cm3.dtb \
     "
 
 KERNEL_DEVICETREE ?= " \
-    ${RPI_KERNEL_DEVICETREE} \
-    ${RPI_KERNEL_DEVICETREE_OVERLAYS} \
+    ${WALLE_KERNEL_DEVICETREE} \
+    ${WALLE_KERNEL_DEVICETREE_OVERLAYS} \
     "
 
 # By default:
@@ -63,7 +57,7 @@ KERNEL_DEVICETREE ?= " \
 #   within u-boot to load the kernel.
 KERNEL_BOOTCMD ??= "bootm"
 KERNEL_IMAGETYPE_UBOOT ??= "uImage"
-KERNEL_IMAGETYPE_DIRECT ??= "zImage"
+KERNEL_IMAGETYPE_DIRECT = "Image"
 KERNEL_IMAGETYPE ?= "${@bb.utils.contains('RPI_USE_U_BOOT', '1', \
         '${KERNEL_IMAGETYPE_UBOOT}', '${KERNEL_IMAGETYPE_DIRECT}', d)}"
 

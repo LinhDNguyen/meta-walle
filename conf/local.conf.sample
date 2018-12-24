@@ -26,7 +26,7 @@ MACHINE = "walle-pi3-64"
 # Choices are Image or zImage if NOT using u-boot (no u-boot is the default)
 # Choices are uImage or zImage if using u-boot, though if you choose zImage
 # with u-boot you will also have to change the boot script boot command
-KERNEL_IMAGETYPE = "zImage"
+KERNEL_IMAGETYPE = "Image"
 
 ENABLE_UART="1"
 

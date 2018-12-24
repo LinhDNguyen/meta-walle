@@ -1,9 +1,9 @@
 inherit image_types
 
 # Set kernel and boot loader
-IMAGE_TYPEDEP_fwup = "ext4"
+IMAGE_TYPEDEP_fwup-img = "ext4"
 
-do_image_fwup[depends] = " \
+do_image_fwup_img[depends] = " \
     parted-native:do_populate_sysroot \
     mtools-native:do_populate_sysroot \
     dosfstools-native:do_populate_sysroot \
@@ -14,9 +14,9 @@ do_image_fwup[depends] = " \
     ${IMAGE_BASENAME}:do_image_ext4 \
 "
 
-do_image_fwup[recrdeps] = "do_build"
+do_image_fwup_img[recrdeps] = "do_build"
 
-IMAGE_CMD_fwup () {
+IMAGE_CMD_fwup-img () {
     echo "OKDA_FW_PLATFORM: ${OKDA_FW_PLATFORM}"
     echo "OKDA_FW_VERSION: ${OKDA_FW_VERSION}"
     echo "OKDA_FW_BOOT_FROM: ${OKDA_FW_BOOT_FROM}"
@@ -50,3 +50,5 @@ IMAGE_CMD_fwup () {
     # Done
     rm -f ${IMGDEPLOYDIR}/dummy.img
 }
+
+IMAGE_TYPES += " fwup-img"
