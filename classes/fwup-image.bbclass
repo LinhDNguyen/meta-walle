@@ -21,21 +21,21 @@ IMAGE_CMD_fwup-img () {
     echo "OKDA_FW_VERSION: ${OKDA_FW_VERSION}"
     echo "OKDA_FW_BOOT_FROM: ${OKDA_FW_BOOT_FROM}"
     # Prepare fwup.conf file
-    cp -f ${DEPLOY_DIR_IMAGE}/fwup.conf.orig ${IMGDEPLOYDIR}/fwup.conf
-    sed -i -e 's/___FW_BOOT_BIN_NAME___/BOOT-svk_okda_stereo_xu1.bin/g' ${IMGDEPLOYDIR}/fwup.conf
-    if [ "${OKDA_FW_BOOT_FROM}" = "emmc" ]; then
-        sed -i -e 's/___FW_UBOOT_SCR_NAME___/uboot-emmc.scr/g' ${IMGDEPLOYDIR}/fwup.conf
-        echo "Use boot script uboot-emmc.scr"
-    else
-        sed -i -e 's/___FW_UBOOT_SCR_NAME___/uboot-mmc.scr/g' ${IMGDEPLOYDIR}/fwup.conf
-        echo "Use boot script uboot-mmc.scr"
-    fi
-    sed -i -e 's/___FW_DEVICE_TREE_NAME___/svk_okda_stereo_xu1-system.dtb/g' ${IMGDEPLOYDIR}/fwup.conf
-    sed -i -e 's/___FW_ROOTFS_NAME___/stereo-camera-image-svk_okda_stereo_xu1.ext4/g' ${IMGDEPLOYDIR}/fwup.conf
-    sed -i "s|___IMAGE_DIR___|${DEPLOY_DIR_IMAGE}|g" ${IMGDEPLOYDIR}/fwup.conf
-    sed -i "s|___CUR_IMAGE_DIR___|${IMGDEPLOYDIR}|g" ${IMGDEPLOYDIR}/fwup.conf
-    sed -i "s|___FW_VERSION___|${OKDA_FW_VERSION}|g" ${IMGDEPLOYDIR}/fwup.conf
-    sed -i "s|___FW_PLATFORM___|${OKDA_FW_PLATFORM}|g" ${IMGDEPLOYDIR}/fwup.conf
+    for f in fwup.conf fwup_revert.conf; do
+        echo "process file: ${f}"
+        cp -f ${DEPLOY_DIR_IMAGE}/${f}.orig ${IMGDEPLOYDIR}/${f}
+
+        # replace var in file
+        tmp="${IMAGE_BASENAME}-${MACHINE}.ext4"
+        sed -i "s|___IMAGE_DIR___|${DEPLOY_DIR_IMAGE}|g"            ${IMGDEPLOYDIR}/${f}
+        sed -i "s|___ROOTFS_DIR___|${tmp}|g"                        ${IMGDEPLOYDIR}/${f}
+        BOOT_DIR="${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles"
+        sed -i "s|___BOOTCODE_BIN___|${BOOT_DIR}/bootcode.bin|g"    ${IMGDEPLOYDIR}/${f}
+        sed -i "s|___FIXUP_DAT___|${BOOT_DIR}/fixup.dat|g"          ${IMGDEPLOYDIR}/${f}
+        sed -i "s|___START_ELF___|${BOOT_DIR}/start.elf|g"          ${IMGDEPLOYDIR}/${f}
+        sed -i "s|___CONFIG_TXT___|${BOOT_DIR}/config.txt|g"        ${IMGDEPLOYDIR}/${f}
+        sed -i "s|___CMDLINE_TXT___|${BOOT_DIR}/cmdline.txt|g"      ${IMGDEPLOYDIR}/${f}
+    done
 
     # Create dummy file
     dd if=/dev/zero of=${IMGDEPLOYDIR}/dummy.img iflag=fullblock bs=1M count=1
@@ -43,9 +43,13 @@ IMAGE_CMD_fwup-img () {
     # Create fwup image
     fwup -c -f ${IMGDEPLOYDIR}/fwup.conf -o ${IMGDEPLOYDIR}/${IMAGE_NAME}.fwup
 
+    fwup -c -f ${IMGDEPLOYDIR}/fwup_revert.conf -o ${IMGDEPLOYDIR}/${IMAGE_NAME}_revert.fwup
+
     # Create link
     rm -f ${IMGDEPLOYDIR}/${IMAGE_BASENAME}-${MACHINE}.fwup
+    rm -f ${IMGDEPLOYDIR}/${IMAGE_BASENAME}-${MACHINE}_revert.fwup
     ln -s ${IMAGE_NAME}.fwup ${IMGDEPLOYDIR}/${IMAGE_BASENAME}-${MACHINE}.fwup
+    ln -s ${IMAGE_NAME}_revert.fwup ${IMGDEPLOYDIR}/${IMAGE_BASENAME}-${MACHINE}_revert.fwup
 
     # Done
     rm -f ${IMGDEPLOYDIR}/dummy.img
