@@ -5,7 +5,7 @@ include conf/machine/include/rpi-default-providers.inc
 SOC_FAMILY = "rpi"
 include conf/machine/include/soc-family.inc
 
-IMAGE_FSTYPES ?= "tar.bz2 ext3 fwup-img"
+IMAGE_FSTYPES ?= "tar.bz2 fwup-img"
 WKS_FILE ?= "sdimage-raspberrypi.wks"
 
 XSERVER = " \
@@ -57,7 +57,7 @@ KERNEL_DEVICETREE ?= " \
 #   within u-boot to load the kernel.
 KERNEL_BOOTCMD ??= "bootm"
 KERNEL_IMAGETYPE_UBOOT ??= "uImage"
-KERNEL_IMAGETYPE_DIRECT = "Image"
+KERNEL_IMAGETYPE_DIRECT = "zImage"
 KERNEL_IMAGETYPE ?= "${@bb.utils.contains('RPI_USE_U_BOOT', '1', \
         '${KERNEL_IMAGETYPE_UBOOT}', '${KERNEL_IMAGETYPE_DIRECT}', d)}"
 

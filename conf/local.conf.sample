@@ -26,7 +26,7 @@ MACHINE = "walle-pi3-64"
 # Choices are Image or zImage if NOT using u-boot (no u-boot is the default)
 # Choices are uImage or zImage if using u-boot, though if you choose zImage
 # with u-boot you will also have to change the boot script boot command
-KERNEL_IMAGETYPE = "Image"
+KERNEL_IMAGETYPE = "zImage"
 
 ENABLE_UART="1"
 
@@ -45,7 +45,7 @@ SDKMACHINE = "x86_64"
 
 #EXTRA_IMAGE_FEATURES = "debug-tweaks"
 INHERIT += "extrausers"
-EXTRA_USERS_PARAMS = "usermod -P linh root; "
+EXTRA_USERS_PARAMS = "usermod -P root root; "
 
 USER_CLASSES = "image-mklibs image-prelink"
 

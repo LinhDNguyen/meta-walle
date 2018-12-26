@@ -1,7 +1,8 @@
-KBUILD_DEFCONFIG = "bcmrpi3_defconfig"
+KBUILD_DEFCONFIG = "bcm2709_defconfig"
 
-KBUILD_DEFCONFIG_raspberrypi3 = "bcmrpi3_defconfig"
+KBUILD_DEFCONFIG_raspberrypi3 = "bcm2709_defconfig"
 KBUILD_DEFCONFIG_walle-pi3-64 = "bcmrpi3_defconfig"
+KBUILD_DEFCONFIG_walle-pi3 = "bcm2709_defconfig"
 
 WALLE_KERNEL_DEVICETREE_OVERLAYS ?= " \
     overlays/dwc2.dtbo \
@@ -27,10 +28,16 @@ WALLE_KERNEL_DEVICETREE_OVERLAYS ?= " \
     overlays/at86rf233.dtbo \
     "
 
-WALLE_KERNEL_DEVICETREE = " \
+WALLE_KERNEL_DEVICETREE_walle-pi3-64 = " \
     broadcom/bcm2710-rpi-3-b.dtb \
     broadcom/bcm2710-rpi-cm3.dtb \
     broadcom/bcm2837-rpi-3-b.dtb \
+    "
+
+WALLE_KERNEL_DEVICETREE_walle-pi3 = " \
+    bcm2710-rpi-3-b.dtb \
+    bcm2710-rpi-cm3.dtb \
+    bcm2837-rpi-3-b.dtb \
     "
 
 KERNEL_DEVICETREE = " \

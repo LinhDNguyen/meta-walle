@@ -37,7 +37,7 @@ define(ROOTFS, "___ROOTFS_DIR___")
 # | (formatted as uboot env)   |
 # +----------------------------+
 # | p0*: Boot A (FAT32)        |
-# | Image, bootcode.bin,       |
+# | zImage, bootcode.bin,      |
 # | config.txt, etc.           |
 # +----------------------------+
 # | p0*: Boot B (FAT32)        |
@@ -62,15 +62,15 @@ define(ROOTFS, "___ROOTFS_DIR___")
 define(UBOOT_ENV_OFFSET, 16)
 define(UBOOT_ENV_COUNT, 16)  # 8 KB
 
-define(BOOT_A_PART_OFFSET, 63)
-define(BOOT_A_PART_COUNT, 38630)
+define(BOOT_A_PART_OFFSET, 2048)
+define(BOOT_A_PART_COUNT, 262144)
 define-eval(BOOT_B_PART_OFFSET, "${BOOT_A_PART_OFFSET} + ${BOOT_A_PART_COUNT}")
 define(BOOT_B_PART_COUNT, ${BOOT_A_PART_COUNT})
 
 # Let the rootfs have room to grow up to 128 MiB and align it to the nearest 1
 # MB boundary
-define(ROOTFS_A_PART_OFFSET, 77324)
-define(ROOTFS_A_PART_COUNT, 2019828)
+define-eval(ROOTFS_A_PART_OFFSET, "${BOOT_B_PART_OFFSET} + ${BOOT_B_PART_COUNT}")
+define(ROOTFS_A_PART_COUNT, 2097152)
 define-eval(ROOTFS_B_PART_OFFSET, "${ROOTFS_A_PART_OFFSET} + ${ROOTFS_A_PART_COUNT}")
 define(ROOTFS_B_PART_COUNT, ${ROOTFS_A_PART_COUNT})
 
@@ -107,8 +107,8 @@ file-resource config.txt {
 file-resource cmdline.txt {
     host-path = "___CMDLINE_TXT___"
 }
-file-resource Image {
-    host-path = "${IMAGE_DIR}/Image"
+file-resource kernel.img {
+    host-path = "${IMAGE_DIR}/zImage"
 }
 file-resource bcm2710-rpi-3-b.dtb {
     host-path = "${IMAGE_DIR}/bcm2710-rpi-3-b.dtb"
@@ -211,7 +211,7 @@ task complete {
     on-resource bootcode.bin { fat_write(${BOOT_A_PART_OFFSET}, "bootcode.bin") }
     on-resource start.elf { fat_write(${BOOT_A_PART_OFFSET}, "start.elf") }
     on-resource fixup.dat { fat_write(${BOOT_A_PART_OFFSET}, "fixup.dat") }
-    on-resource Image { fat_write(${BOOT_A_PART_OFFSET}, "Image") }
+    on-resource kernel.img { fat_write(${BOOT_A_PART_OFFSET}, "kernel.img") }
     on-resource bcm2710-rpi-3-b.dtb { fat_write(${BOOT_A_PART_OFFSET}, "bcm2710-rpi-3-b.dtb") }
     on-resource w1-gpio-pullup.dtbo { fat_write(${BOOT_A_PART_OFFSET}, "overlays/w1-gpio-pullup.dtbo") }
     on-resource dwc2.dtbo { fat_write(${BOOT_A_PART_OFFSET}, "overlays/dwc2.dtbo") }
@@ -272,7 +272,7 @@ task upgrade.a {
     on-resource bootcode.bin { fat_write(${BOOT_A_PART_OFFSET}, "bootcode.bin") }
     on-resource start.elf { fat_write(${BOOT_A_PART_OFFSET}, "start.elf") }
     on-resource fixup.dat { fat_write(${BOOT_A_PART_OFFSET}, "fixup.dat") }
-    on-resource Image { fat_write(${BOOT_A_PART_OFFSET}, "Image") }
+    on-resource kernel.img { fat_write(${BOOT_A_PART_OFFSET}, "kernel.img") }
     on-resource bcm2710-rpi-3-b.dtb { fat_write(${BOOT_A_PART_OFFSET}, "bcm2710-rpi-3-b.dtb") }
     on-resource w1-gpio-pullup.dtbo { fat_write(${BOOT_A_PART_OFFSET}, "overlays/w1-gpio-pullup.dtbo") }
     on-resource dwc2.dtbo { fat_write(${BOOT_A_PART_OFFSET}, "overlays/dwc2.dtbo") }
@@ -336,7 +336,7 @@ task upgrade.b {
     on-resource bootcode.bin { fat_write(${BOOT_B_PART_OFFSET}, "bootcode.bin") }
     on-resource start.elf { fat_write(${BOOT_B_PART_OFFSET}, "start.elf") }
     on-resource fixup.dat { fat_write(${BOOT_B_PART_OFFSET}, "fixup.dat") }
-    on-resource Image { fat_write(${BOOT_B_PART_OFFSET}, "Image") }
+    on-resource kernel.img { fat_write(${BOOT_B_PART_OFFSET}, "kernel.img") }
     on-resource bcm2710-rpi-3-b.dtb { fat_write(${BOOT_B_PART_OFFSET}, "bcm2710-rpi-3-b.dtb") }
     on-resource w1-gpio-pullup.dtbo { fat_write(${BOOT_B_PART_OFFSET}, "overlays/w1-gpio-pullup.dtbo") }
     on-resource dwc2.dtbo { fat_write(${BOOT_B_PART_OFFSET}, "overlays/dwc2.dtbo") }
