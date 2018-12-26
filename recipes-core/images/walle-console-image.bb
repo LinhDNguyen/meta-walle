@@ -21,6 +21,8 @@ WIFI_SUPPORT = " \
     iw \
     wireless-tools \
     wpa-supplicant \
+    linux-firmware \
+    dhcp-client \
 "
 
 DEV_SDK_INSTALL = " \
@@ -74,6 +76,7 @@ EXTRA_TOOLS_INSTALL = " \
     util-linux \
     wget \
     zip \
+    fwup \
 "
 
 RPI_STUFF = " \
