@@ -14,6 +14,12 @@ CORE_OS = " \
     openssh openssh-keygen openssh-sftp-server \
     packagegroup-core-boot \
     tzdata \
+    e2fsprogs-mke2fs \
+    e2fsprogs-tune2fs \
+    e2fsprogs-e2fsck \
+    e2fsprogs-resize2fs \
+    perl \
+    first-boot \
 "
 
 WIFI_SUPPORT = " \
@@ -21,8 +27,8 @@ WIFI_SUPPORT = " \
     iw \
     wireless-tools \
     wpa-supplicant \
-    linux-firmware \
     dhcp-client \
+    walle-network \
 "
 
 DEV_SDK_INSTALL = " \
@@ -77,6 +83,7 @@ EXTRA_TOOLS_INSTALL = " \
     wget \
     zip \
     fwup \
+    bluez5 \
 "
 
 RPI_STUFF = " \
@@ -90,6 +97,7 @@ IMAGE_INSTALL += " \
     ${DEV_EXTRAS} \
     ${EXTRA_TOOLS_INSTALL} \
     ${WIFI_SUPPORT} \
+    linux-firmware-raspbian \
 "
 
 set_local_timezone() {

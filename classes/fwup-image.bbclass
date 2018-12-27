@@ -35,6 +35,7 @@ IMAGE_CMD_fwup-img () {
         sed -i "s|___START_ELF___|${BOOT_DIR}/start.elf|g"          ${IMGDEPLOYDIR}/${f}
         sed -i "s|___CONFIG_TXT___|${BOOT_DIR}/config.txt|g"        ${IMGDEPLOYDIR}/${f}
         sed -i "s|___CMDLINE_TXT___|${BOOT_DIR}/cmdline.txt|g"      ${IMGDEPLOYDIR}/${f}
+        sed -i "s|___DUMMY_IMG___|${IMGDEPLOYDIR}/dummy.img|g"      ${IMGDEPLOYDIR}/${f}
     done
 
     # Create dummy file

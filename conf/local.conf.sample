@@ -15,7 +15,7 @@ PREFERRED_PROVIDER_udev = "eudev"
 
 MACHINE_FEATURES_remove = "apm"
 
-IMAGE_FSTYPES = "tar.xz ext4 fwup"
+IMAGE_FSTYPES = "tar ext4 fwup-img"
 
 # override the meta-raspberrypi default 4.9 kernel
 PREFERRED_VERSION_linux-raspberrypi = "4.14.%"
@@ -45,7 +45,7 @@ SDKMACHINE = "x86_64"
 
 #EXTRA_IMAGE_FEATURES = "debug-tweaks"
 INHERIT += "extrausers"
-EXTRA_USERS_PARAMS = "usermod -P root root; "
+EXTRA_USERS_PARAMS ?= "usermod -P root root; "
 
 USER_CLASSES = "image-mklibs image-prelink"
 

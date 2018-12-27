@@ -70,7 +70,7 @@ define(BOOT_B_PART_COUNT, ${BOOT_A_PART_COUNT})
 # Let the rootfs have room to grow up to 128 MiB and align it to the nearest 1
 # MB boundary
 define-eval(ROOTFS_A_PART_OFFSET, "${BOOT_B_PART_OFFSET} + ${BOOT_B_PART_COUNT}")
-define(ROOTFS_A_PART_COUNT, 2097152)
+define(ROOTFS_A_PART_COUNT, 4194304)
 define-eval(ROOTFS_B_PART_OFFSET, "${ROOTFS_A_PART_OFFSET} + ${ROOTFS_A_PART_COUNT}")
 define(ROOTFS_B_PART_COUNT, ${ROOTFS_A_PART_COUNT})
 
@@ -125,6 +125,11 @@ file-resource rootfs.img {
 
     # Error out if the rootfs size exceeds the partition size
     assert-size-lte = ${ROOTFS_A_PART_COUNT}
+}
+
+file-resource dummy.img {
+    host-path = "___DUMMY_IMG___"
+    assert-size-lte = ${APP_PART_COUNT}
 }
 
 mbr mbr-a {
@@ -220,6 +225,8 @@ task complete {
         # write to the first rootfs partition
         raw_write(${ROOTFS_A_PART_OFFSET})
     }
+
+    on-resource dummy.img { raw_write(${APP_PART_OFFSET}) }
 
     on-finish {
         # Clear out any old data in the B partition that might be mistaken for
