@@ -103,7 +103,10 @@ systemctl start wpa_supplicant@wlan0.service
 echo "Workaround for wpa_supplicant@wlan0.service done" >> ${LOG}
 
 ### TODO: workaround. enable bluetooth service
+ln -s /lib/firmware /etc/firmware
+systemctl enable hciattach
 systemctl enable bluetooth
+systemctl start hciattach
 systemctl start bluetooth
 echo "Workaround for bluetooth service done" >> ${LOG}
 

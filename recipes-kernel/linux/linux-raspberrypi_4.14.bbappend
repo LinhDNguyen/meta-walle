@@ -44,3 +44,6 @@ KERNEL_DEVICETREE = " \
     ${WALLE_KERNEL_DEVICETREE} \
     ${WALLE_KERNEL_DEVICETREE_OVERLAYS} \
     "
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+SRC_URI += "file://rpi-kernel-bluez-mesh.cfg"

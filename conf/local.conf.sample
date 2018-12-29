@@ -4,7 +4,7 @@
 
 LICENSE_FLAGS_WHITELIST = "commercial"
 
-DISTRO_FEATURES = "ext2 pam opengl usbhost ${DISTRO_FEATURES_LIBC}"
+DISTRO_FEATURES = "ext2 pam opengl usbhost ${DISTRO_FEATURES_LIBC} systemd bluez5"
 
 DISTRO_FEATURES_BACKFILL_CONSIDERED += "pulseaudio"
 
@@ -45,7 +45,7 @@ SDKMACHINE = "x86_64"
 
 #EXTRA_IMAGE_FEATURES = "debug-tweaks"
 INHERIT += "extrausers"
-EXTRA_USERS_PARAMS ?= "usermod -P root root; "
+EXTRA_USERS_PARAMS = "usermod -P root root; useradd -m -s /bin/bash -G root,dialout,bin,tty,disk,sudo,audio,video,shutdown,users,sshd walle; usermod -P walle walle;"
 
 USER_CLASSES = "image-mklibs image-prelink"
 
@@ -70,3 +70,5 @@ OKDA_FW_ETH0_TYPE ?= "dhcp"
 OKDA_FW_ETH0_IP ?= "10.71.4.104"
 OKDA_FW_ETH0_GW ?= "10.71.4.1"
 OKDA_FW_ETH0_DNS ?= "10.100.1.2"
+
+CORE_IMAGE_EXTRA_INSTALL += "wayland weston"

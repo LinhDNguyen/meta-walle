@@ -54,11 +54,14 @@ DEV_SDK_INSTALL = " \
     make \
     pkgconfig \
     python3-modules \
+    python3-dbus \
+    python3-pip \
 "
 
 DEV_EXTRAS = " \
     ntp \
     ntp-tickadj \
+    systemd-analyze \
 "
 
 EXTRA_TOOLS_INSTALL = " \
@@ -116,6 +119,8 @@ ROOTFS_POSTPROCESS_COMMAND += " \
 IMAGE_FSTYPES_remove = "rpi-sdimg"
 IMAGE_CLASSES += " fwup-img"
 IMAGE_FSTYPES_append = " fwup-img"
+
+DISTRO_FEATURES += " bluez5"
 
 export IMAGE_BASENAME = "walle-console-image"
 

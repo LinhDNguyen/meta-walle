@@ -1,0 +1,13 @@
+[Unit]
+Description=Bluetooth support for Rapsberry PI 3
+Wants=bluetooth.service
+Before=bluetooth.service
+ConditionPathExists=/dev/ttyAMA0
+ConditionPathExists=/lib/firmware/brcm
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/hciattach ttyAMA0 bcm43xx 921600 noflow -
+
+[Install]
+WantedBy=multi-user.target
