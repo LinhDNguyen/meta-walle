@@ -53,9 +53,6 @@ DEV_SDK_INSTALL = " \
     libtool \
     make \
     pkgconfig \
-    python3-modules \
-    python3-dbus \
-    python3-pip \
 "
 
 DEV_EXTRAS = " \
@@ -87,16 +84,13 @@ EXTRA_TOOLS_INSTALL = " \
     zip \
     fwup \
     bluez5 \
-"
-
-RPI_STUFF = " \
-    raspi2fb \
-    userland \
+    python3-modules \
+    python3-dbus \
+    python3-pip \
 "
 
 IMAGE_INSTALL += " \
     ${CORE_OS} \
-    ${DEV_SDK_INSTALL} \
     ${DEV_EXTRAS} \
     ${EXTRA_TOOLS_INSTALL} \
     ${WIFI_SUPPORT} \

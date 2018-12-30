@@ -4,7 +4,7 @@
 
 LICENSE_FLAGS_WHITELIST = "commercial"
 
-DISTRO_FEATURES = "ext2 pam opengl usbhost ${DISTRO_FEATURES_LIBC} systemd bluez5"
+DISTRO_FEATURES = "ext2 pam opengl usbhost ${DISTRO_FEATURES_LIBC} systemd bluez5 wayland"
 
 DISTRO_FEATURES_BACKFILL_CONSIDERED += "pulseaudio"
 
@@ -71,4 +71,4 @@ OKDA_FW_ETH0_IP ?= "10.71.4.104"
 OKDA_FW_ETH0_GW ?= "10.71.4.1"
 OKDA_FW_ETH0_DNS ?= "10.100.1.2"
 
-CORE_IMAGE_EXTRA_INSTALL += "wayland weston"
+IMAGE_INSTALL += " wayland"
