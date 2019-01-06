@@ -16,7 +16,7 @@ BBLAYERS ?= " \
     ##OEROOT##/../meta-openembedded/meta-oe \
     ##OEROOT##/../meta-qt5 \
     ##OEROOT##/../meta-raspberrypi \
-    ##OEROOT##/../meta-linh \
+    ##OEROOT##/../meta-walle \
 "
 
 BBLAYERS_NON_REMOVABLE ?= " \
