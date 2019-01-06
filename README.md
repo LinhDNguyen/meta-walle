@@ -1,12 +1,11 @@
-Yocto meta for RPI zero w
-=========================
+Yocto meta layer to compile WallE personal assistant
+====================================================
 
-To compile qt5-image for firmware upgrade
+Installation:
 ```
-bitbake linh-fwup-image
-```
-
-To compile qt5-image only
-```
-bitbake linh-qt5-image
+$ mkdir walle_yocto && cd walle_yocto
+$ repo init -u https://github.com/nvl1109/yocto-manifest -b master
+$ repo sync
+$ . setup build_walle
+$ bitbake linh-qt5-image
 ```

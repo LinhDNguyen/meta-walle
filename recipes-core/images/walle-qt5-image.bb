@@ -145,6 +145,7 @@ WALLE_TOOLS = " \
     walle-screen-utils \
     walle-greeting \
     walle-sound \
+    walle-gui \
 "
 
 IMAGE_INSTALL += " \

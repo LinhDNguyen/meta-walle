@@ -1,0 +1,12 @@
+[Unit]
+Description=WallE GUI
+After=basic.target
+
+[Service]
+User=root
+Type=simple
+Environment=QT_QPA_EGLFS_PHYSICAL_WIDTH=154 QT_QPA_PLATFORM=eglfs QT_QPA_EGLFS_PHYSICAL_HEIGHT=84
+ExecStart=/usr/bin/walle-gui
+
+[Install]
+WantedBy=multi-user.target
