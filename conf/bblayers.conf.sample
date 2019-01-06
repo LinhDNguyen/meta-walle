@@ -16,6 +16,10 @@ BBLAYERS ?= " \
     ##OEROOT##/../meta-openembedded/meta-oe \
     ##OEROOT##/../meta-qt5 \
     ##OEROOT##/../meta-raspberrypi \
+    ##OEROOT##/../meta-homeassistant \
+    ##OEROOT##/../meta-java \
+    ##OEROOT##/../meta-iot-cloud \
+    ##OEROOT##/../meta-cloud-services/meta-openstack \
     ##OEROOT##/../meta-walle \
 "
 
