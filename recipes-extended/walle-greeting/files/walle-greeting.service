@@ -1,0 +1,10 @@
+[Unit]
+Description=WallE Greeting
+After=sound.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/walle-greeting.sh
+
+[Install]
+WantedBy=multi-user.target

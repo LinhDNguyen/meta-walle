@@ -4,6 +4,8 @@ LICENSE = "MIT"
 
 require walle-console-image.bb
 
+inherit populate_sdk_qt5
+
 QT_DEV_TOOLS = " \
     qtbase-dev \
     qtbase-mkspecs \
@@ -133,11 +135,16 @@ MYCROFT_AI = " \
     icu \
     jq \
     glib-2.0 \
-    walle-sound \
     pamixer \
     ${PULSE_SOUND} \
     espeak \
     sox \
+"
+
+WALLE_TOOLS = " \
+    walle-screen-utils \
+    walle-greeting \
+    walle-sound \
 "
 
 IMAGE_INSTALL += " \
@@ -154,7 +161,7 @@ IMAGE_INSTALL += " \
     mpg123 \
     alsa-utils alsa-tools alsa-plugins alsa-lib alsa-oss \
     ${MYCROFT_AI} \
-    walle-screen-utils \
+    ${WALLE_TOOLS} \
 "
 
 DISTRO_FEATURES += "wifi wayland"
