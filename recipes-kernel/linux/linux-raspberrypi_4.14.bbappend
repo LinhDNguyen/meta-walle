@@ -1,10 +1,15 @@
+LINUX_VERSION = "4.14.91"
+
+SRCREV = "4c5aec7827ac970729ac54e57cbd85fba878a462"
+
+KCONFIG_MODE = "--alldefconfig"
 KBUILD_DEFCONFIG = "bcm2709_defconfig"
 
 KBUILD_DEFCONFIG_raspberrypi3 = "bcm2709_defconfig"
 KBUILD_DEFCONFIG_walle-pi3-64 = "bcmrpi3_defconfig"
 KBUILD_DEFCONFIG_walle-pi3 = "bcm2709_defconfig"
 
-WALLE_KERNEL_DEVICETREE_OVERLAYS ?= " \
+WALLE_KERNEL_DEVICETREE_OVERLAYS = " \
     overlays/dwc2.dtbo \
     overlays/hifiberry-amp.dtbo \
     overlays/hifiberry-dac.dtbo \
@@ -26,6 +31,7 @@ WALLE_KERNEL_DEVICETREE_OVERLAYS ?= " \
     overlays/pi3-miniuart-bt.dtbo \
     overlays/vc4-kms-v3d.dtbo \
     overlays/at86rf233.dtbo \
+    overlays/i2s-mmap.dtbo \
     "
 
 WALLE_KERNEL_DEVICETREE_walle-pi3-64 = " \
@@ -46,4 +52,6 @@ KERNEL_DEVICETREE = " \
     "
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-SRC_URI += "file://rpi-kernel-bluez-mesh.cfg"
+SRC_URI += "file://rpi-kernel-bluez-mesh.cfg \
+    file://0001-Add-i2c-mmap.dtbo-overlay.patch \
+    "

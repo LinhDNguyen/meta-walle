@@ -1,0 +1,1 @@
+PACKAGECONFIG += " pulseaudio alsa lame oggvorbis magic ao"

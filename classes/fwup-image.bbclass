@@ -1,5 +1,13 @@
 inherit image_types
 
+WALLE_FW_PLATFORM ?= "walle"
+WALLE_FW_VERSION ?= "0.0.1"
+# Network type: dhcp/static/off
+WALLE_FW_ETH0_TYPE ?= "dhcp"
+WALLE_FW_ETH0_IP ?= "192.168.1.104"
+WALLE_FW_ETH0_GW ?= "192.168.1.1"
+WALLE_FW_ETH0_DNS ?= "192.168.1.2"
+
 # Set kernel and boot loader
 IMAGE_TYPEDEP_fwup-img = "ext4"
 
@@ -17,9 +25,9 @@ do_image_fwup_img[depends] = " \
 do_image_fwup_img[recrdeps] = "do_build"
 
 IMAGE_CMD_fwup-img () {
-    echo "OKDA_FW_PLATFORM: ${OKDA_FW_PLATFORM}"
-    echo "OKDA_FW_VERSION: ${OKDA_FW_VERSION}"
-    echo "OKDA_FW_BOOT_FROM: ${OKDA_FW_BOOT_FROM}"
+    echo "WALLE_FW_PLATFORM: ${WALLE_FW_PLATFORM}"
+    echo "WALLE_FW_VERSION: ${WALLE_FW_VERSION}"
+    echo "WALLE_FW_BOOT_FROM: ${WALLE_FW_BOOT_FROM}"
     # Prepare fwup.conf file
     for f in fwup.conf fwup_revert.conf; do
         echo "process file: ${f}"

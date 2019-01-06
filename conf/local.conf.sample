@@ -21,7 +21,7 @@ IMAGE_FSTYPES = "tar ext4 fwup-img"
 PREFERRED_VERSION_linux-raspberrypi = "4.14.%"
 
 # Choose the board you are building for
-MACHINE = "walle-pi3-64"
+MACHINE = "walle-pi3"
 
 # Choices are Image or zImage if NOT using u-boot (no u-boot is the default)
 # Choices are uImage or zImage if using u-boot, though if you choose zImage
@@ -62,13 +62,12 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = ""
 
-OKDA_FW_PLATFORM ?= "stereocam"
-OKDA_FW_VERSION ?= "0.1.1"
-OKDA_FW_BOOT_FROM ?= "emmc"
+WALLE_FW_PLATFORM ?= "walle"
+WALLE_FW_VERSION ?= "0.2.1"
 # Network type: dhcp/static/off
-OKDA_FW_ETH0_TYPE ?= "dhcp"
-OKDA_FW_ETH0_IP ?= "10.71.4.104"
-OKDA_FW_ETH0_GW ?= "10.71.4.1"
-OKDA_FW_ETH0_DNS ?= "10.100.1.2"
+WALLE_FW_ETH0_TYPE ?= "dhcp"
+WALLE_FW_ETH0_IP ?= "10.71.4.104"
+WALLE_FW_ETH0_GW ?= "10.71.4.1"
+WALLE_FW_ETH0_DNS ?= "10.100.1.2"
 
 IMAGE_INSTALL += " wayland"

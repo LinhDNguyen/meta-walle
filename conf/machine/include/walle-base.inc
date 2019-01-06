@@ -5,6 +5,8 @@ include conf/machine/include/rpi-default-providers.inc
 SOC_FAMILY = "rpi"
 include conf/machine/include/soc-family.inc
 
+MACHINE_FEATURES += "apm usbhost keyboard vfat ext2 screen touchscreen alsa bluetooth wifi sdio"
+
 IMAGE_FSTYPES ?= "tar ext4 fwup-img"
 WKS_FILE ?= "sdimage-raspberrypi.wks"
 
@@ -14,10 +16,11 @@ XSERVER = " \
     ${@bb.utils.contains("MACHINE_FEATURES", "vc4graphics", "xf86-video-modesetting", "xf86-video-fbdev", d)} \
     "
 
-WALLE_KERNEL_DEVICETREE_OVERLAYS ?= " \
+WALLE_KERNEL_DEVICETREE_OVERLAYS = " \
     overlays/dwc2.dtbo \
     overlays/hifiberry-amp.dtbo \
     overlays/hifiberry-dac.dtbo \
+    overlays/i2s-mmap.dtbo \
     overlays/hifiberry-dacplus.dtbo \
     overlays/hifiberry-digi.dtbo \
     overlays/i2c-rtc.dtbo \
@@ -60,8 +63,6 @@ KERNEL_IMAGETYPE_UBOOT ??= "uImage"
 KERNEL_IMAGETYPE_DIRECT = "zImage"
 KERNEL_IMAGETYPE ?= "${@bb.utils.contains('RPI_USE_U_BOOT', '1', \
         '${KERNEL_IMAGETYPE_UBOOT}', '${KERNEL_IMAGETYPE_DIRECT}', d)}"
-
-MACHINE_FEATURES += "apm usbhost keyboard vfat ext2 screen touchscreen alsa bluetooth wifi sdio"
 
 # Raspberry Pi has no hardware clock
 MACHINE_FEATURES_BACKFILL_CONSIDERED = "rtc"

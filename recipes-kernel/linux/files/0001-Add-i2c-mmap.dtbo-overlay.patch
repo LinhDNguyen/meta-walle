@@ -1,0 +1,45 @@
+From e2ac74622e3df39c127d3fe0a9606a3cc9333e3b Mon Sep 17 00:00:00 2001
+From: Linh Nguyen <nvl1109@gmail.com>
+Date: Fri, 4 Jan 2019 21:17:31 +0700
+Subject: [PATCH] Add i2c-mmap.dtbo overlay
+
+---
+ arch/arm/boot/dts/overlays/Makefile             |  1 +
+ arch/arm/boot/dts/overlays/i2s-mmap-overlay.dts | 13 +++++++++++++
+ 2 files changed, 14 insertions(+)
+ create mode 100644 arch/arm/boot/dts/overlays/i2s-mmap-overlay.dts
+
+diff --git a/arch/arm/boot/dts/overlays/Makefile b/arch/arm/boot/dts/overlays/Makefile
+index d71d427ae16a..471c11776137 100644
+--- a/arch/arm/boot/dts/overlays/Makefile
++++ b/arch/arm/boot/dts/overlays/Makefile
+@@ -59,6 +59,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
+ 	i2c0-bcm2708.dtbo \
+ 	i2c1-bcm2708.dtbo \
+ 	i2s-gpio28-31.dtbo \
++	i2s-mmap.dtbo \
+ 	iqaudio-dac.dtbo \
+ 	iqaudio-dacplus.dtbo \
+ 	iqaudio-digi-wm8804-audio.dtbo \
+diff --git a/arch/arm/boot/dts/overlays/i2s-mmap-overlay.dts b/arch/arm/boot/dts/overlays/i2s-mmap-overlay.dts
+new file mode 100644
+index 000000000000..a11160afa4bf
+--- /dev/null
++++ b/arch/arm/boot/dts/overlays/i2s-mmap-overlay.dts
+@@ -0,0 +1,13 @@
++/dts-v1/;
++/plugin/;
++
++/{
++	compatible = "brcm,bcm2708";
++
++	fragment@0 {
++		target = <&i2s>;
++		__overlay__ {
++			brcm,enable-mmap;
++		};
++	};
++};
+-- 
+2.17.1
+

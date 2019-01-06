@@ -110,6 +110,11 @@ systemctl start hciattach
 systemctl start bluetooth
 echo "Workaround for bluetooth service done" >> ${LOG}
 
+### TODO: workaround. enable pulseaudio service
+systemctl enable pulseaudio
+systemctl start pulseaudio
+echo "Workaround for pulseaudio service done" >> ${LOG}
+
 #job done, remove it from systemd services
 systemctl disable firstboot.service
 
