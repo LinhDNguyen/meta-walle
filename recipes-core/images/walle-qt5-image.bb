@@ -139,6 +139,24 @@ MYCROFT_AI = " \
     ${PULSE_SOUND} \
     espeak \
     sox \
+    mimic \
+    mycroft-core \
+"
+
+VIET_BOT = " \
+    libsdl-dev \
+    pkgconfig \
+    sudo \
+    lsof \
+    python3-cffi \
+    gcc \
+    g++ \
+    binutils \
+    libsdl-mixer \
+    python3-numpy \
+    libsdl-image \
+    libsdl-ttf \
+    python3-google-cloud-speech \
 "
 
 WALLE_TOOLS = " \
@@ -163,6 +181,7 @@ IMAGE_INSTALL += " \
     alsa-utils alsa-tools alsa-plugins alsa-lib alsa-oss \
     ${MYCROFT_AI} \
     ${WALLE_TOOLS} \
+    ${VIET_BOT} \
 "
 
 DISTRO_FEATURES += "wifi wayland"

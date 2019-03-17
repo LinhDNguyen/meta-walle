@@ -115,6 +115,8 @@ systemctl enable pulseaudio
 systemctl start pulseaudio
 echo "Workaround for pulseaudio service done" >> ${LOG}
 
+### TODO: workaround,
+
 #job done, remove it from systemd services
 systemctl disable firstboot.service
 

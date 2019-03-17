@@ -19,6 +19,7 @@ BBLAYERS ?= " \
     ##OEROOT##/../meta-homeassistant \
     ##OEROOT##/../meta-java \
     ##OEROOT##/../meta-iot-cloud \
+    ##OEROOT##/../meta-cloud-services \
     ##OEROOT##/../meta-cloud-services/meta-openstack \
     ##OEROOT##/../meta-walle \
 "
